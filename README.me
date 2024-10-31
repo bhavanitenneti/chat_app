@@ -1,0 +1,58 @@
+# Chat Application
+
+This is a real-time chat application built using Flask and MySQL, with Docker support.
+
+## Installation
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Set up the virtual environment:
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+4. Install the dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Database Setup
+
+1. Initialize the database:
+    ```bash
+    flask db init
+    flask db migrate -m "Initial migration"
+    flask db upgrade
+    ```
+
+## Docker Setup
+
+1. Build Docker images:
+    ```bash
+    docker build -t chat_app .
+    docker build -t mysql_db -f Dockerfile.mysql .
+    ```
+2. Run Docker containers:
+    ```bash
+    docker run -d -p 5000:5000 chat_app
+    docker run -d -p 3306:3306 mysql_db
+    ```
+
+## Usage
+
+- Register, login, and chat using Postman or any other REST client.
+
+## Backup and Restore
+
+- Backup:
+    ```bash
+    docker exec -t <db_container_name> mysqldump -u root -p<rootpassword> chat_db > backup.sql
+    ```
+- Restore:
+    ```bash
+    docker exec -i <db_container_name> mysql -u root -p<rootpassword> chat_db < backup.sql
+    ```
+
+## Author
+
+Your Name
